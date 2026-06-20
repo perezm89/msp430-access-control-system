@@ -1,0 +1,20 @@
+# CCS build output
+Debug/
+Release/
+
+# CCS generated settings
+.settings/
+
+# Temporary files
+*.tmp
+*.log
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Backup files
+*~
