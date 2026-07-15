@@ -1,13 +1,22 @@
-# CCS build output
+# MSP430 Access Control System
+# Git ignore rules for CCS, Windows, and temporary files.
+# Build Output
 Debug/
 Release/
 
-# CCS generated settings
+# CCS / Eclipse Settings
 .settings/
+.launches/
+RemoteSystemsTempFiles/
+.jxbrowser.userdata/
 
-# Temporary files
+# Workspace Metadata
+.metadata/
+
+# Temporary Files
 *.tmp
 *.log
+*~
 
 # VS Code
 .vscode/
@@ -15,6 +24,3 @@ Release/
 # Windows
 Thumbs.db
 Desktop.ini
-
-# Backup files
-*~
