@@ -1,12 +1,17 @@
-#include <msp430.h> 
+#include <msp430.h>
+#include "gpio.h"
 
-
-/**
- * main.c
- */
 int main(void)
 {
-	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
-	
-	return 0;
+    WDTCTL = WDTPW | WDTHOLD;   // Stop the watchdog timer
+
+    GPIO_init();
+
+//    LED_red_on();
+//    LED_red_off();
+    LED_red_toggle();
+    while (1)
+    {
+
+    }
 }
