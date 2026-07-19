@@ -3,15 +3,19 @@
 
 int main(void)
 {
-    WDTCTL = WDTPW | WDTHOLD;   // Stop the watchdog timer
+    WDTCTL = WDTPW | WDTHOLD;
 
     GPIO_init();
 
-//    LED_red_on();
-//    LED_red_off();
-    LED_red_toggle();
     while (1)
     {
-
+        if (GPIO_buttonPressed())
+        {
+            GPIO_redLEDOn();
+        }
+        else
+        {
+            GPIO_redLEDOff();
+        }
     }
 }

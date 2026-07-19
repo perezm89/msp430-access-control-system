@@ -1,10 +1,11 @@
 #ifndef GPIO_H
 #define GPIO_H
 
-void GPIO_init(void);
+#include <stdbool.h>
 
-void LED_red_on(void);
-void LED_red_off(void);
-void LED_red_toggle(void);
+void GPIO_init(void);
+void GPIO_redLEDOn(void);
+void GPIO_redLEDOff(void);
+bool GPIO_buttonPressed(void);
 
 #endif
