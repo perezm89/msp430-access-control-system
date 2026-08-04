@@ -9,6 +9,9 @@
 #define BUTTON1_IN     P1IN
 #define BUTTON1_REN    P1REN
 #define BUTTON1_OUT    P1OUT
+#define BUTTON1_IE     P1IE
+#define BUTTON1_IES    P1IES
+#define BUTTON1_IFG    P1IFG
 
 void GPIO_init(void)
 {
@@ -19,6 +22,10 @@ void GPIO_init(void)
     BUTTON1_DIR &= ~BUTTON1_PIN;
     BUTTON1_REN |= BUTTON1_PIN;
     BUTTON1_OUT |= BUTTON1_PIN;
+
+    BUTTON1_IES |= BUTTON1_PIN;   // Trigger on HIGH-to-LOW edge
+    BUTTON1_IFG &= ~BUTTON1_PIN;  // Clear any pending interrupt flag
+    BUTTON1_IE  |= BUTTON1_PIN;   // Enable interrupt for the button
 }
 
 void GPIO_redLEDOn(void)
@@ -35,4 +42,9 @@ void GPIO_redLEDOff(void)
 bool GPIO_buttonPressed(void)
 {
     return (BUTTON1_IN & BUTTON1_PIN) == 0;
+}
+
+void GPIO_redLEDToggle(void)
+{
+    RED_LED_OUT ^= RED_LED_PIN;
 }
