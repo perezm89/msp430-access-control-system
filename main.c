@@ -1,13 +1,16 @@
 #include <msp430.h>
 #include "gpio.h"
+#include "timer.h"
 
 int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;
 
     GPIO_init();
+    TIMER_init();
 
     __enable_interrupt();
+
 
     while (1)
     {
@@ -16,13 +19,28 @@ int main(void)
 }
 
 #pragma vector=PORT1_VECTOR
-
 __interrupt void Port_1_ISR(void)
 {
     if (P1IFG & BIT1)
     {
-        GPIO_redLEDToggle();
+        P1IE &= ~BIT1;      // Temporarily disable button interrupt
 
-        P1IFG &= ~BIT1;
+        TIMER_start();      // Start debounce timer
+
+        P1IFG &= ~BIT1;     // Clear button interrupt flag
     }
+}
+
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void Timer_A0_ISR(void)
+{
+    TIMER_stop();
+
+    if (GPIO_buttonPressed())
+    {
+        GPIO_redLEDToggle();
+    }
+
+    P1IFG &= ~BIT1;
+    P1IE |= BIT1;
 }
