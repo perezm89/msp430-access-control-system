@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include "gpio.h"
 #include "timer.h"
+#include "access_control.h"
 
 int main(void)
 {
@@ -8,6 +9,7 @@ int main(void)
 
     GPIO_init();
     TIMER_init();
+    AccessControl_init();
 
     __enable_interrupt();
 
@@ -38,7 +40,7 @@ __interrupt void Timer_A0_ISR(void)
 
     if (GPIO_buttonPressed())
     {
-        GPIO_redLEDToggle();
+        AccessControl_handleButtonPress();
     }
 
     P1IFG &= ~BIT1;

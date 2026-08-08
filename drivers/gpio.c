@@ -12,11 +12,17 @@
 #define BUTTON1_IE     P1IE
 #define BUTTON1_IES    P1IES
 #define BUTTON1_IFG    P1IFG
+#define GREEN_LED_PIN  BIT7
+#define GREEN_LED_DIR  P9DIR
+#define GREEN_LED_OUT  P9OUT
 
 void GPIO_init(void)
 {
     RED_LED_OUT &= ~RED_LED_PIN; // initially LED is turned off
     RED_LED_DIR |= RED_LED_PIN;
+
+    GREEN_LED_OUT &= ~GREEN_LED_PIN;   // Start green LED off
+    GREEN_LED_DIR |= GREEN_LED_PIN;
     PM5CTL0 &= ~LOCKLPM5; // clear the default high-impedance state
 
     BUTTON1_DIR &= ~BUTTON1_PIN;
@@ -37,6 +43,16 @@ void GPIO_redLEDOff(void)
 {
     RED_LED_OUT &= ~RED_LED_PIN;
 
+}
+
+void GPIO_greenLEDOn(void)
+{
+    GREEN_LED_OUT |= GREEN_LED_PIN;
+}
+
+void GPIO_greenLEDOff(void)
+{
+    GREEN_LED_OUT &= ~GREEN_LED_PIN;
 }
 
 bool GPIO_buttonPressed(void)
