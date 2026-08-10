@@ -1,6 +1,14 @@
 # MSP430 Access Control System
 
-An embedded access-control system built on the MSP430FR6989 LaunchPad. The project uses a finite-state machine architecture to authenticate users and control access while demonstrating fundamental embedded-systems concepts such as GPIO, interrupts, timers, and hardware abstraction.
+A bare-metal access-control system built on the MSP430FR6989 LaunchPad. The project uses a finite-state-machine architecture to authenticate users and control access while demonstrating fundamental embedded-systems concepts such as GPIO, interrupts, timers, hardware abstraction, and driver development.
+
+---
+
+## System Architecture
+
+![MSP430 Block Diagram](docs/images/MSP430_Block_Diagram.png)
+
+The MSP430 Access Control System uses a finite-state-machine architecture to authenticate users and control access. Hardware peripherals are abstracted through dedicated drivers, while an optional ESP32 communication module provides Wi-Fi connectivity and remote monitoring capabilities.
 
 ---
 
@@ -58,23 +66,6 @@ Planned:
 
 ---
 
-## Software Architecture
-
-```text
-main.c
-   |
-   V
-access_control.c
-   |
-   V
-gpio.c    timer.c    keypad.c    uart.c
-   |
-   V
-MSP430 hardware
-```
-
----
-
 ## State Machine
 
 ```text
@@ -116,3 +107,12 @@ ALARM
 - Wi-Fi connectivity using an ESP32 coprocessor
 - Web dashboard
 - Custom PCB
+
+## Demonstrations
+
+The following demonstrations will be added as development progresses:
+
+- GPIO interrupt handling
+- Timer-based debouncing
+- Keypad authentication
+- Alarm-state transitions
